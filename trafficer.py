@@ -46,26 +46,26 @@ def kill_process_name(process_name):
 
 def network():
     try:
-        print("%-7s %-42s %-10s %-42s %-10s %s" % ("PID", "laddr", 'lport', 'raddr', 'rport', 'status'))
-        print("%-7s %-42s %-10s %-42s %-10s %s" % (4*"-", 6*"-", 6*"-", 6*"-", 6*"-", 7*"-"))
+        print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % ("PID", "laddr", 'lport', 'raddr', 'rport', 'status', 'name'))
+        print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (4*"-", 6*"-", 6*"-", 6*"-", 6*"-", 7*"-", 5*"-"))
         for p in psutil.net_connections():
             try:
-                print("%-7s %-42s %-10s %-42s %-10s %s" % (p.pid, p.laddr.ip, p.laddr.port, p.raddr.ip, p.raddr.port, p.status))
+                print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (p.pid, p.laddr.ip, p.laddr.port, p.raddr.ip, p.raddr.port, p.status, psutil.Process(p.pid).name()))
             except:
-                print("%-7s %-42s %-10s %-42s %-10s %s" % (p.pid, p.laddr.ip, p.laddr.port, "NONE", "NONE", p.status))
+                print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (p.pid, p.laddr.ip, p.laddr.port, "NONE", "NONE", p.status, psutil.Process(p.pid).name()))
     except:
         pass
 
 def network_pid(pid):
     try:
-        print("%-7s %-42s %-10s %-42s %-10s %s" % ("PID", "laddr", 'lport', 'raddr', 'rport', 'status'))
-        print("%-7s %-42s %-10s %-42s %-10s %s" % (4*"-", 6*"-", 6*"-", 6*"-", 6*"-", 7*"-"))
+        print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % ("PID", "laddr", 'lport', 'raddr', 'rport', 'status', 'name'))
+        print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (4*"-", 6*"-", 6*"-", 6*"-", 6*"-", 7*"-", 5*"-"))
         for p in psutil.net_connections():
             if (p.pid == int(pid)):
                 try:
-                    print("%-7s %-42s %-10s %-42s %-10s %s" % (p.pid, p.laddr.ip, p.laddr.port, p.raddr.ip, p.raddr.port, p.status))
+                    print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (p.pid, p.laddr.ip, p.laddr.port, p.raddr.ip, p.raddr.port, p.status, psutil.Process(p.pid).name()))
                 except:
-                    print("%-7s %-42s %-10s %-42s %-10s %s" % (p.pid, p.laddr.ip, p.laddr.port, "NONE", "NONE", p.status))
+                    print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (p.pid, p.laddr.ip, p.laddr.port, "NONE", "NONE", p.status, psutil.Process(p.pid).name()))
     except:
         pass
 
@@ -105,14 +105,35 @@ def netstat_pid(pid):
         print(f"netstat Error: {Error}")
         exit(0)
 
+def pid_info(pid):
+    try:
+        proc = psutil.Process(int(pid))
+        print("%-6s %-8s %s" % ("PID", "name", "status"))
+        print("%-6s %-8s %s" % (4*"-", 5*"-", 8*"-"))
+        print("%-6s %-8s %s" % (proc.pid, proc.name(), proc.status()))
+    except Exception as Error:
+        print(f"pid info Error: {Error}")
+
 def main():
     clear()
     try:
         test = sys.argv[1]
         if (test == "-h" or test == "--help"):
-            print("Usage:\n   -nk   --network       <Show Network traffic>\n   -n    --netstat       <Show Process traffic>\n   -nn   --netstatname   <Show Process traffic by name>\n   -nkp  --networkpid    <Show Network traffic by pid>\n   -np   --netstatpid    <Show Process traffic by pid>\n   -kn   --killname      <kill process by name>\n   -kp   --killpid       <Kill process by pid>")
+            print("Usage:\n   -nk   --network       <Show Network traffic>\n   -n    --netstat       <Show Process traffic>\n   -nn   --netstatname   <Show Process traffic by name>\n   -nkp  --networkpid    <Show Network traffic by pid>\n   -np   --netstatpid    <Show Process traffic by pid>\n   -kn   --killname      <kill process by name>\n   -kp   --killpid       <Kill process by pid>\n   -pi   --pidinfo       <Show pid info>")
     except:
-        print("Usage:\n   -nk   --network       <Show Network traffic>\n   -n    --netstat       <Show Process traffic>\n   -nn   --netstatname   <Show Process traffic by name>\n   -nkp  --networkpid    <Show Network traffic by pid>\n   -np   --netstatpid    <Show Process traffic by pid>\n   -kn   --killname      <kill process by name>\n   -kp   --killpid       <Kill process by pid>")
+        print("Usage:\n   -nk   --network       <Show Network traffic>\n   -n    --netstat       <Show Process traffic>\n   -nn   --netstatname   <Show Process traffic by name>\n   -nkp  --networkpid    <Show Network traffic by pid>\n   -np   --netstatpid    <Show Process traffic by pid>\n   -kn   --killname      <kill process by name>\n   -kp   --killpid       <Kill process by pid>\n   -pi   --pidinfo       <Show pid info>")
+
+    try:
+        if ('-pi' in sys.argv or '--pidinfo' in sys.argv):
+            for i in range(len(sys.argv)):
+                if (sys.argv[i] == '-pi' or sys.argv[i] == '--pidinfo'):
+                    i+=1
+                    pid_info(sys.argv[i])
+                    break
+        else:
+            pass
+    except:
+        pass
 
     try:
         if ('-nk' in sys.argv or '--network' in sys.argv):
