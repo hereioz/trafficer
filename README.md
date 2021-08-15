@@ -1,8 +1,8 @@
 # trafficer
 
 * #### Linux
-       git clone https://github.com/hereioz/Admin-Finder.git
-       cd Admin-Finder
+       git clone https://github.com/hereioz/trafficer.git
+       cd trafficer
        pip3 install -r requirements.txt
-       chmod +x AdminFinder.py
-       python3 AdminFinder.py
+       chmod +x trafficer.py
+       python3 trafficer.py
