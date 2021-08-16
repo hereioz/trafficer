@@ -1,7 +1,7 @@
 # trafficer
 
-* #### Features
-       *Show Network traffic
+# Features
+       Show Network traffic
        Show Process traffic
        Show Process traffic by name
        Show Network traffic by pid
