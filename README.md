@@ -1,14 +1,14 @@
 # trafficer
 
 * #### Features
-* Show Network traffic
-* Show Process traffic
+  * Show Network traffic
+  * Show Process traffic
 * Show Process traffic by name
 * Show Network traffic by pid
 * Show Process traffic by pid
 * kill process by name
 * Kill process by pid
-* how pid info
+* Show pid info
 
 * #### Linux
        git clone https://github.com/hereioz/trafficer.git
