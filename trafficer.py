@@ -9,7 +9,8 @@ class command:
                 if (enquiries.confirm('Attention! there is a new update Want install it?')):
                     command().clear()
                     print("Downloading...")
-                    with open(__file__, 'w') as f:
+                    os.remove(__file__)
+                    with open("trafficer.py", 'w') as f:
                         f.write(respone)
                     f.close()
                     time.sleep(0.75)
