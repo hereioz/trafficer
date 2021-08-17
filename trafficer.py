@@ -14,7 +14,6 @@ class command:
                         f.write(respone)
                     f.close()
                     time.sleep(0.75)
-                    command().clear()
                     print("Done...")
                     time.sleep(0.75)
                     command().clear()
