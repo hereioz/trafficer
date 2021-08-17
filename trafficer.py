@@ -12,7 +12,7 @@ class command:
                         f.write(respone)
                     f.close()
                     print("Done...")
-                    time.sleep(0.50)
+                    time.sleep(0.75)
                     command().clear()
                     exit(0)
 
