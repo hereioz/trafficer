@@ -5,10 +5,12 @@ class command:
         respone = requests.get("https://raw.githubusercontent.com/hereioz/trafficer/main/trafficer.py").text
         with open(__file__, 'r') as f:
             if (f.read() != respone):
+                f.close()
                 if (enquiries.confirm('Attention! there is a new update Want install it?')):
                     print("Downloading...")
                     with open(__file__, 'w') as f:
                         f.write(respone)
+                    f.close()
                     print("Done...")
                     time.sleep(0.50)
                     command().clear()
