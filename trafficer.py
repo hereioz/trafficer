@@ -3,7 +3,6 @@ import psutil,os,sys,time,platform,requests,enquiries
 class command:
     def check_updates(self):
         respone = requests.get("https://raw.githubusercontent.com/hereioz/trafficer/main/trafficer.py").text
-        #print(respone)
         with open(__file__, 'r') as f:
             if (f.read() != respone):
                 if (enquiries.confirm('Attention! there is a new update Want install it?')):
