@@ -1,6 +1,20 @@
-import psutil,os,sys,time,platform
+import psutil,os,sys,time,platform,requests,enquiries
 
 class command:
+    def check_updates(self):
+        respone = requests.get("https://raw.githubusercontent.com/hereioz/trafficer/main/trafficer.py").text
+        #print(respone)
+        with open(__file__, 'r') as f:
+            if (f.read() != respone):
+                if (enquiries.confirm('Attention! there is a new update Want install it?')):
+                    print("Downloading...")
+                    with open(__file__, 'w') as f:
+                        f.write(respone)
+                    print("Done...")
+                    time.sleep(50)
+                    command().clear()
+                    exit(0)
+
     def clear(self):
         os.system("clear")
 
@@ -69,7 +83,6 @@ class command:
                         print("%-7s %-42s %-10s %-42s %-10s %-15s %s" % (p.pid, p.laddr.ip, p.laddr.port, "NONE", "NONE", p.status, psutil.Process(p.pid).name()))
         except:
             pass
-
 
     def netstat(self):
         try:
@@ -220,5 +233,6 @@ def main():
     except:
         pass
 
+command().check_updates()
 command().OS_check()
 main()
