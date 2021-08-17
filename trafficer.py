@@ -10,7 +10,7 @@ class command:
                     with open(__file__, 'w') as f:
                         f.write(respone)
                     print("Done...")
-                    time.sleep(50)
+                    time.sleep(0.50)
                     command().clear()
                     exit(0)
 
