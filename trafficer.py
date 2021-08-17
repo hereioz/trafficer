@@ -232,6 +232,6 @@ def main():
     except:
         pass
 
-command().check_updates()
 command().OS_check()
+command().check_updates()
 main()
