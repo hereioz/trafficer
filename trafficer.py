@@ -10,7 +10,7 @@ class command:
                     command().clear()
                     print("Downloading...")
                     os.remove(__file__)
-                    with open("trafficer.py", 'w') as f:
+                    with open(__file__, 'w') as f:
                         f.write(respone)
                     f.close()
                     time.sleep(0.75)
