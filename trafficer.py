@@ -1,5 +1,6 @@
 import psutil,os,sys,time,platform,requests,enquiries
 
+author = "MatrixX#3867"
 class command:
     def check_updates(self):
         respone = requests.get("https://raw.githubusercontent.com/hereioz/trafficer/main/trafficer.py").text
